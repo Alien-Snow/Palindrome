@@ -1,13 +1,13 @@
-#class MyString :
-#    def __init__(self, inputStr) :
-#        string = inputStr
-#        length = len(inputStr)
+class MyString :
+    def __init__(self, inputStr) :
+        self.string = inputStr
+        self.length = len(inputStr)
 
-def IsPalindrome(n) :
-    if n == n[::-1] :   # palindrome found
-        return True
-    else :
-        return False
+    def IsPalindrome(self) :
+        if self.string == self.string[::-1] :   # palindrome found
+            return True
+        else :
+            return False
 
 if __name__=="__main__" :
     import sys

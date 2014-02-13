@@ -1,18 +1,18 @@
 import unittest
-from Palindrome import IsPalindrome
+from Palindrome import MyString
 
 class Test_IsPalindromeTests(unittest.TestCase):
     def testPalindromeFalse(self) :
-        testStr = 'aab'
-        self.assertFalse(IsPalindrome(testStr))
+        mine = MyString('aab')
+        self.assertFalse(mine.IsPalindrome())
 
     def testPalindromeTrue(self) :
-        testStr = 'aba'
-        self.assertTrue(IsPalindrome(testStr))
+        mine = MyString('aba')
+        self.assertTrue(mine.IsPalindrome())
 
     def test_single_letter_Palindrome(self) :
-        testStr = 'a'
-        self.assertTrue(IsPalindrome(testStr))
+        mine = MyString('a')
+        self.assertTrue(mine.IsPalindrome())
 
 if __name__ == '__main__':
     unittest.main()
