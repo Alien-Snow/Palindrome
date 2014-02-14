@@ -1,54 +1,38 @@
-class MyString :
+class MyString(object):
+
     def __init__(self, inputStr) :
         self.string = inputStr
         self.length = len(inputStr)
+        self.longest = ''
+        self.position = 0
 
-    def IsPalindrome(self) :
-        if self.string == self.string[::-1] :   # palindrome found
+    @staticmethod
+    def IsPalindrome(slice) :
+        if slice == slice[::-1] :   # palindrome found
             return True
         else :
             return False
 
-if __name__=="__main__" :
-    import sys
-    import os
-    import getopt
+    def PrintLongestFound(self) :
+        line = ''
+        if len(self.longest) < 2 :
+            print '\n\nThe string :\n', line.join(self.string)
+            print('Doesn\'t have a palindrome.\n')
+        else :
+            print '\n\nThe longest palindrome in :\n', line.join(self.string), '\nis\n', line.join(self.longest), '\n'
 
-    class Usage(Exception) :
-        def __init__(self, msg) :
-            self.msg = msg
-
-    def main (argv = None) :
-        if argv is None :
-            argv = sys.argv
-        try :
-            try :
-                opts, args = getopt.getopt(argv[1: ], "h", ["help"])
-            except getopt.error, msg :
-                raise Usage(msg)
-            path = raw_input("Please enter in a path and filename >")
-            input = []
-            if not os.path.exists(path) :
-                raise IOError, 'Invalid path or filename.'
-            with open(path) as openFile :
-                for line in openFile :
-                    line = line.strip()
-                    line = ''.join(line.split())
-                    input.extend(line.rstrip('\r\n') )
-            input = [ea.upper() for ea in input]
-            print input
-            longestString = ''
-
-            input = 'aba'
-            result = IsPalindrome(input)
-            if result is True :
-                print input, "is a Palindrome."
+    def FindPalindrome(self, index, offset = 1) :
+            if ((index + offset + 1) >= (self.length - 1)) | ((index - offset) < 0) :
+                return
+            elif self.IsPalindrome(self.string[index - offset : index + offset + 1]) :
+                self.Compare(self.string[index - offset : index + offset + 1])
+                offset += 1
+                self.FindPalindrome(index, offset)
             else :
-                print input, "is not a Palindrome."
-        except Usage, err :
-            print >> sys.stderr, err.msg
-            print >> sys.stderr, "for help use --help"
-            return 2
+                return
 
-    if __name__=='__main__' :
-        sys.exit(main())
+    def Compare(self, found) :
+        if len(found) > len(self.longest) :
+            self.longest = found
+        else :
+            return
